@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        .element {
+            color: white;
+            background: black;
+            padding: 10px;
+        }
+
+        .blue {
+            background: blue;
+        }
+
+        .green {
+            background: green;
+        }
+
+        .red {
+            background: red;
+        }
+
+        .large {
+            font-size: 40px;
+        }
+    </style>
+</head>
+
+<body>
+    <div id="app">
+        <div class="element"
+            v-bind:class="colors"
+            v-bind:style="newStyle"
+        >This is my content</div>
+        <div
+            class="element"
+            v-bind:class="[
+                colors2.blueClass.active ? colors2.blueClass.name : '',
+                colors2.redClass.active ? colors2.redClass.name : '',
+            ]"
+        >This is my content 2</div>
+        <div v-on:click="colors.red = !colors.red">Activate red</div>
+        <div v-on:click="colors.blue = !colors.blue">Activate blue</div>
+    </div>
+    <script src="https://unpkg.com/vue@3/dist/vue.global.js"></script>
+    <script>
+        const date = new Date().toLocaleDateString()
+        const App = {
+            data() {
+                return {
+                    colors: {
+                        blue: false,
+                        red: false
+                    },
+                    colors2: {
+                        blueClass: {
+                            name: 'blue',
+                            active: true
+                        },
+                        redClass: {
+                            name: 'red',
+                            active: false
+                        }
+                    },
+                    newStyle: {
+                        fontSize: '30px',
+                        border: '10px solid black'
+                    }
+                }
+            },
+            methods: {
+            },
+        }
+        Vue.createApp(App).mount('#app')
+    </script>
+</body>
+
+</html>

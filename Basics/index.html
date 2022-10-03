@@ -1,0 +1,166 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        .box {
+            background-color: red;
+            width: 200px;
+            height: 200px;
+        }
+    </style>
+</head>
+
+<body>
+    <div id="app">
+        <p>{{ greeting }}</p>
+        <p>Is this true? {{ isTrue ? 'Yes' : 'No' }}</p>
+        <p>{{ names[0] }}</p>
+        <ul>
+            <li v-for="(name, index) in names" :key="index">{{ name }} : {{ index }}</li>
+        </ul>
+        <p>{{ address.street }}, {{ address.state }}, {{ address.country }}, {{ address.zipCode }}</p>
+        <p>{{ getName() }}</p>
+        <p>{{ welcome() }}</p>
+        <img v-bind:src="src" v-bind:alt="alt">
+        <hr>
+        <img :src="src" :alt="alt">
+        <hr>
+        <a :href="link">Google.com</a>
+        <p v-text="myText"></p>
+        <p v-html="myHtml"></p>
+        <p v-if="userAge >= allowedAge">Allowed</p>
+        <p v-else-if="userName === 'Hamza'">You are Allowed</p>
+        <p v-else>Not Allowed</p>
+
+        <p v-if="checkUser()">Method If Statement</p>
+        <p v-else>Method Else Statement</p>
+
+        <p v-show="true">Show Directive</p>
+        <p v-show="false">Show Directive</p>
+
+        <ul>
+            <li v-for="(car, index) in cars" :key="index">{{ car.name }} : {{ index }} : {{ car.color }}</li>
+        </ul>
+
+        <ul>
+            <li v-for="(value, key, index) in user">
+                {{ index }} : {{ key }} : {{ value }}
+            </li>
+        </ul>
+
+        <p v-once>{{ userName }}</p>
+        <p>{{ userName }}</p>
+        <p>{{ updateUserName() }}</p>
+
+        <div v-on:click="updateUserName2">
+            Click me
+        </div>
+        <div class="box" v-on:mousemove="getCoord">Hover Me!</div>
+        <p>x: {{ xAxis }}</p>
+        <p>y: {{ yAxis }}</p>
+
+        <p>{{ user.name }}</p>
+        <button v-on:click="changeName('Hamza Zafar Bhatti', $event)">Change Name (left click)</button><br>
+        <button v-on:click.right="changeName('Hamza Bhatti', $event)">Change Name (right click)</button><br>
+        <input type="text" v-on:keyup="keyupEvent" /><br>
+        <input type="text" v-on:keyup.space.enter.G="keyupEvent" /><br>
+        <form v-on:submit.prevent="formHandler">
+            <input type="text" v-model="formData.firstName" /><br>
+            <input type="text" v-model="formData.lastName" /><br>
+            <button type="submit">Submit</button>
+        </form>
+    </div>
+    <script src="https://unpkg.com/vue@3/dist/vue.global.js"></script>
+    <script>
+        const date = new Date().toLocaleDateString()
+        const App = {
+            data() {
+                return {
+                    user: {
+                        name: 'Hamza',
+                        lastName: 'Bhatti',
+                        age: 27
+                    },
+                    greeting: 'Hello Guys, today is ' + date,
+                    isTrue: true,
+                    names: ['Hamza', 'Asad', 'Khurram', 'Farrukh', 'Adeel'],
+                    address: {
+                        street: '21st Street',
+                        state: 'Nevada',
+                        country: 'USA',
+                        zipCode: '1231'
+                    },
+                    getName: () => {
+                        return 'This is Hamza Zafar Bhatti'
+                    },
+                    src: 'https://via.placeholder.com/300',
+                    alt: 'Image',
+                    link: 'https://google.com',
+                    myText: 'Hi, Guys!!!',
+                    myHtml: '<strong>Html Text</strong>',
+                    userAge: 15,
+                    userName: 'Hamza',
+                    allowedAge: 18,
+                    cars: [
+                        {
+                            name: "Car 1",
+                            color: "blue"
+                        },
+                        {
+                            name: "Car 2",
+                            color: "red"
+                        },
+                        {
+                            name: "Car 3",
+                            color: "green"
+                        },
+                    ],
+                    xAxis: 0,
+                    yAxis: 0,
+                    formData: {
+                        firstName: '',
+                        lastName: '',
+                    }
+                }
+            },
+            methods: {
+                welcome() {
+                    return this.greeting
+                },
+                checkUser() {
+                    return this.userName === 'Hamza1' ? true : false
+                },
+                updateUserName() {
+                    setTimeout(() => {
+                        this.userName = "Bhatti"
+                    }, 2000)
+                },
+                updateUserName2() {
+                    this.userName = "Hamza"
+                },
+                getCoord(event) {
+                    this.xAxis = event.clientX;
+                    this.yAxis = event.clientY;
+                },
+                changeName(newName, event) {
+                    this.user.name = newName
+                    console.log(event)
+                },
+                keyupEvent(event) {
+                    console.log(event.target.value)
+                },
+                formHandler(event) {
+                    console.log(this.formData.firstName, this.formData.lastName)
+                }
+            },
+        }
+        Vue.createApp(App).mount('#app')
+    </script>
+</body>
+
+</html>

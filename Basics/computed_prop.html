@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <div id="app">
+        <input type="text" v-model="user">
+        <button v-on:click="toggleActive">Toggle Action</button>
+        <hr>
+        <div>
+            Name: <!-- {{ message() }} ---  -->{{ compMessage }}
+        </div>
+        <div>
+            Name: <!-- {{ isActive() }} ---  -->{{ compActive }}
+        </div>
+    </div>
+    <script src="https://unpkg.com/vue@3/dist/vue.global.js"></script>
+    <script>
+        const date = new Date().toLocaleDateString()
+        const App = {
+            data() {
+                return {
+                    user: '',
+                    active: false,
+                }
+            },
+            computed: {
+                compMessage() {
+                    console.log('computed compMessage() triggered')
+                    return this.user === 'Hamza' ? 'Welcome' : 'Not Welcome'
+                },
+                compActive() {
+                    console.log('computed compActive() triggered')
+                    return this.active ? 'Active' : 'Not Active'
+                }
+            },
+            methods: {
+                message() {
+                    console.log('Method message() triggered')
+                    return this.user === 'Hamza' ? 'Welcome' : 'Not Welcome'
+                },
+                isActive() {
+                    console.log('Method isActive() triggered')
+                    return this.active ? 'Active' : 'Not Active'
+                },
+                toggleActive() {
+                    this.active = !this.active
+                }
+            },
+        }
+        Vue.createApp(App).mount('#app')
+    </script>
+</body>
+
+</html>

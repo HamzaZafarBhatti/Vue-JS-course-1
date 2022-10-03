@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <div id="app1">
+        <div>Instance one: {{ value }}</div>
+        <button @click="changeValue ">Click</button>
+    </div>
+    <div id="app2">
+        <div>Instance one: {{ value }}</div>
+        <button @click="sayHello ">Say Hello</button>
+    </div>
+    <script src="https://unpkg.com/vue@3/dist/vue.global.js"></script>
+    <script>
+        let message = 'Hi Guys!!';
+        const app1 = Vue.createApp({
+            data() {
+                return {
+                    value: 'Instance one working'
+                }
+            },
+            methods: {
+                changeValue() {
+                    app2.value = this.value
+                }
+            },
+        }).mount('#app1')
+        const app2 = Vue.createApp({
+            data() {
+                return {
+                    value: 'Instance two working'
+                }
+            },
+            methods: {
+                sayHello() {
+                    alert(message)
+                }
+            },
+        }).mount('#app2')
+    </script>
+</body>
+
+</html>

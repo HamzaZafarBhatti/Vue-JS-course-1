@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <div id="app">
+        <app-header></app-header>
+        <user-name></user-name>
+        <app-footer></app-footer>
+    </div>
+    <script src="https://unpkg.com/vue@3/dist/vue.global.js"></script>
+    <script>
+        const app = Vue.createApp({})
+
+        app.component('app-header', {
+            data() {
+                return {
+                    name: 'Header'
+                }
+            },
+            template: `
+            <div>{{ name }}</div>
+            `
+        })
+        app.component('app-footer', {
+            data() {
+                return {
+                    name: 'Footer'
+                }
+            },
+            template: `
+            <div>{{ name }}</div>
+            `
+        })
+
+        app.component('user-name', {
+            data() {
+                return {
+                    name: 'Hamza',
+                }
+            },
+            methods: {
+            },
+            template: `
+            <div>{{ name }}</div>
+            `
+        })
+
+        app.mount('#app')
+    </script>
+</body>
+
+</html>
