@@ -4,7 +4,7 @@
     <ul>
       <li><span>Name: </span> {{ name }}</li>
       <li><span>Name: </span> {{ aka }}</li>
-      <li><span>Last Name: </span> {{ lastname }}</li>
+      <li><span>Last Name: </span> {{ userLastname }}</li>
     </ul>
   </div>
 </template>
@@ -12,7 +12,11 @@
 <script>
 export default {
   name: "UserProfile",
-  props: ["aka", "lastname"],
+  props: {
+    aka: String,
+    userLastname: String,
+    userAge: Integer,
+  },
   data() {
     return {
       name: "Hamza",
