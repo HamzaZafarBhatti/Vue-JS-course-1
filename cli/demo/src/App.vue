@@ -1,7 +1,12 @@
 <template>
   <app-header></app-header>
   <div class="container">
-    <user-profile :aka="name" :userLastname="lastname" :userAge="userAge"></user-profile>
+    <user-profile
+      :aka="name"
+      :userLastname="lastname"
+      :userAge="userAge"
+      :userParents="parents"
+    ></user-profile>
     <button @click="updateName">Update Name</button>
   </div>
   <app-footer></app-footer>
@@ -16,8 +21,12 @@ export default {
   data() {
     return {
       name: "kalu",
-      lastname: 'Bhatti',
-      userAge: 18
+      lastname: "Bhatti",
+      userAge: 18,
+      parents: {
+        father: "Zafar",
+        mother: "Nuzhat",
+      },
     };
   },
   methods: {
