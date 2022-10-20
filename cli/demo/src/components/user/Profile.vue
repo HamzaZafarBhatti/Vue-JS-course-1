@@ -12,6 +12,9 @@
         </li>
       </ul>
     </ul>
+    <button @click="updateLastname">Change from Child</button>
+    <button @click="sayHello">Say Hello</button>
+    <button @click="updateAge(27)">Update Age</button>
   </div>
 </template>
 
@@ -19,16 +22,47 @@
 export default {
   name: "UserProfile",
   props: {
-    aka: String,
-    userLastname: String,
-    userAge: Number,
-    userParents: Object
+    aka: {
+      type: String,
+      required: true,
+      default: 'N/A'
+    },
+    userLastname: {
+      type: String,
+      // validator(value){
+      //   if(value === 'Bhatti') {
+      //     return true
+      //   } else {
+      //     return false
+      //   }
+      // }
+    },
+    userAge: [Number, String],
+    userParents: Object,
+    updateAge: Function
+  },
+  emits: {
+    'update-lastname': function(lastname ) {
+      if(lastname === 'Zafar Bhatti') {
+        return true
+      }else {
+        return false
+      }
+    }
   },
   data() {
     return {
       name: "Hamza",
     };
   },
+  methods: {
+    updateLastname() {
+      this.$emit('update-lastname', 'Zafar Bhatti')
+    },
+    sayHello() {
+      this.$emit('say-hello')
+    }
+  }
 };
 </script>
 

@@ -2,10 +2,12 @@
   <app-header></app-header>
   <div class="container">
     <user-profile
-      :aka="name"
       :userLastname="lastname"
       :userAge="userAge"
       :userParents="parents"
+      @update-lastname="lastname = $event"
+      @say-hello="alertHello"
+      :updateAge="updateAge"
     ></user-profile>
     <button @click="updateName">Update Name</button>
   </div>
@@ -33,6 +35,12 @@ export default {
     updateName() {
       this.name = "Sufi";
     },
+    alertHello() {
+      alert('Helooooo')
+    },
+    updateAge(value) {
+      this.userAge = value
+    }
   },
 };
 </script>
