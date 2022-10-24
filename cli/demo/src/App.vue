@@ -1,51 +1,32 @@
 <template>
   <app-header></app-header>
   <div class="container">
-    <user-profile
-      :userLastname="lastname"
-      :userAge="userAge"
-      :userParents="parents"
-      @update-lastname="lastname = $event"
-      @say-hello="alertHello"
-      :updateAge="updateAge"
-    ></user-profile>
-    <button @click="updateName">Update Name</button>
+    <button @click="this.activeComp = 'playerBhatti'">Bhatti</button>
+    <button @click="this.activeComp = 'playerHamza'">Hamza</button>
+    <!-- <playerHamza></playerHamza>
+    <playerBhatti></playerBhatti> -->
+    <component :is="activeComp"></component>
   </div>
   <app-footer></app-footer>
 </template>
-
+  
 <script>
-import userProfile from "./components/user/Profile.vue";
+import playerHamza from './components/players/hamza.vue'
+import playerBhatti from './components/players/bhatti.vue'
 export default {
   components: {
-    userProfile,
+    playerHamza,
+    playerBhatti,
   },
   data() {
     return {
-      name: "kalu",
-      lastname: "Bhatti",
-      userAge: 18,
-      parents: {
-        father: "Zafar",
-        mother: "Nuzhat",
-      },
+        activeComp: 'playerHamza'
     };
-  },
-  methods: {
-    updateName() {
-      this.name = "Sufi";
-    },
-    alertHello() {
-      alert('Helooooo')
-    },
-    updateAge(value) {
-      this.userAge = value
-    }
   },
 };
 </script>
-
-<style>
+  
+  <style>
 body {
   padding: 0;
   margin: 0;
