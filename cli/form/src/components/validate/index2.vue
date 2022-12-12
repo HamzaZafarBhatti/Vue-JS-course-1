@@ -58,7 +58,6 @@
 
 <script>
 import { Field, Form, ErrorMessage } from "vee-validate";
-import * as yup from "yup";
 export default {
   components: {
     Field,
@@ -68,9 +67,28 @@ export default {
   data() {
     return {
       formSchema: {
-        name: yup.string().required("Name is required"),
-        email: yup.string().required("Email is required").email("Not valid"),
-        message: yup.string().required("Message is required"),
+        name(value) {
+          if (value && value.trim()) {
+            return true;
+          } else {
+            return "Name field is required";
+          }
+        },
+        email(value) {
+          if (!value) {
+            return "Email field is required";
+          }
+          if (!this.validEmail(value)) {
+            return "Bad Email";
+          }
+          return true;
+        },
+        message(value) {
+          if (!value) {
+            return "Message field is required";
+          }
+          return true;
+        },
       },
     };
   },
