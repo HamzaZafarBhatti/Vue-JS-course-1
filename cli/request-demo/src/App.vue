@@ -33,7 +33,7 @@ import compAddUsers from "./components/AddUsers.vue";
 export default {
   data() {
     return {
-      active: "compUsers",
+      active: "compAddUsers",
     };
   },
   components: {
