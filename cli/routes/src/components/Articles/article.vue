@@ -1,5 +1,6 @@
 <template>
 <div v-if="Object.keys(article).length !== 0">
+    <div>From Props: {{ myProp }}</div>
     <div class="p-4 p-md-5 mb-4 text-white rounded bg-dark">
         <div class="col-md-6 px-0">
             <h1 class="display-4 fst-italic">
@@ -44,6 +45,7 @@
 <script>
 import axios from "axios";
 export default {
+    props: ['myProp'],
     data() {
         return {
             article: {},
