@@ -21,6 +21,21 @@ const theData = (route) => {
     }
 }
 
+const checkAuth = () => {
+    const isAuth = false
+    if (!isAuth) {
+        return '/login'
+    }
+    return true
+}
+const isAdmin = () => {
+    const isAdmin = false
+    if (!isAdmin) {
+        return '/login'
+    }
+    return true
+}
+
 const router = createRouter({
     history: createWebHistory(),
     routes: [
@@ -30,29 +45,32 @@ const router = createRouter({
         // ] },
         {
             path: '/articles', component: Articles,
-            beforeEnter: () => {
-                const isAuth = false
-                if(!isAuth) {
-                    return '/login'
-                }
-                return true
-            }
+            beforeEnter: [checkAuth, isAdmin]
         },
         { path: '/article/:id', component: Article, props: theData },
         // { path: '/contact', component: Contact, name: 'contact' },
         {
-            path: '/contact', components: {
+            path: '/contact', meta: { authCheck: true }, components: {
                 default: Contact,
                 notify: Notify
             }, name: 'contact'
         },
         // {path: '/contact', redirect: '/'  },
         { path: '/:notFound(.*)', component: NotFound },
-        { path: '/login', component: Login }
+        { path: '/login', meta: { authCheck: true }, component: Login }
     ],
     linkActiveClass: 'active'
 })
 
+router.beforeEach((to, from, next) => {
+        const isAuth = false
+    if (to.meta.authCheck) {
+        if (to.path !== '/login' && !isAuth) return next({ path: '/login' })
+        else if (to.path === '/login' && isAuth) return next({ path: '/' })
+        return next()
+    }
+    return next()
+})
 // router.beforeEach((to, from, next) => {
 //     console.log('before Each')
 //     console.log(to)

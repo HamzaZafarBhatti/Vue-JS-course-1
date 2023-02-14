@@ -126,7 +126,27 @@
 <script>
 export default {
   created() {
-    console.log(this.$route)
+    console.log(this.$route);
   },
-}
+  beforeRouteEnter(to) {
+    if (to.meta.authCheck) {
+      const isAuth = false;
+      if (!isAuth) {
+        return "/login";
+      }
+      return true;
+    }
+  },
+  beforeRouteUpdate(/* to */) {
+    // const isAuth = true
+    // if (!isAuth) {
+    //     return '/login'
+    // }
+    // return true
+  },
+  beforeRouteLeave(/* to */) {
+    // alert('are you sure?')
+    // return false;
+  },
+};
 </script>
